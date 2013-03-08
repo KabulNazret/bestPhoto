@@ -50,7 +50,7 @@ class admin_bestPhoto_recount_view extends ipsCommand {
 					$s = $start;
 					$e = $end;
 				}
-			
+				
 				
 				ipsRegistry::DB()->allow_sub_select=1;
 				$q = "	SELECT type_id, SUM(rep_rating) as rp
@@ -59,7 +59,30 @@ class admin_bestPhoto_recount_view extends ipsCommand {
 								AND type = 'id'
 								AND rep_rating != -1
 								AND rep_date BETWEEN " . $s . " AND " . $e . "
-					 	GROUP BY type_id
+					";
+				
+				//have some error photos?
+				if(!empty($this->settings['bestPhoto_blocked_photos'])) {
+					$photos = explode(',', $this->settings['bestPhoto_blocked_photos']);
+					
+					if(is_array($photos)) {
+						$blockedPhotos = array();
+						foreach($photos as $photoId) {
+							$photoId = (int)trim($photoId);
+							if(!empty($photoId) && ctype_digit($photoId)) {
+								$blockedPhotos[] = $photoId;
+							}
+						}
+						
+						//got valid ids
+						if(!empty($blockedPhotos)) {
+							$q .= " AND type_id NOT IN (" . implode(',', $blockedPhotos) . ") ";
+						}
+						
+					}
+				}
+				
+				$q .= "	GROUP BY type_id
 						ORDER BY rp DESC
 						LIMIT 1
 						";
@@ -98,6 +121,8 @@ class admin_bestPhoto_recount_view extends ipsCommand {
         
 		//$html = $this->registry->output->loadTemplate( 'cp_skin_recount' );
 		//$this->registry->output->html .= $html->recount();
+		
+		$this->lang->loadLanguageFile( array( 'admin_main' ), 'bestPhoto' );
 		
 		//instead using foreign template we just put html code below:	
 		$html = "<div class='section_title'><h2>{$this->lang->words['bestPhoto_recount_title']}</h2></div>";

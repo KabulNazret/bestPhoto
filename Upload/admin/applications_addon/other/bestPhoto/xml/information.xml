@@ -4,7 +4,7 @@
     <name>Фото недели</name>
     <public_name>Фото недели</public_name>
     <hide_tab>1</hide_tab>
-    <author>Anthony</author>
+    <author>Anthony</author>    
     <description>Вывод статистики лучших фотографий понедельно</description>
     <disabledatinstall>0</disabledatinstall>
     <global_caches/>

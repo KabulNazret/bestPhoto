@@ -31,7 +31,7 @@ class public_bestPhoto_main_view extends ipsCommand {
 			$this->registry->setClass( 'gallery', new ipsGallery( $this->registry ) );
 		}
 		
-		/* Language */
+		//load language
 		$this->lang->loadLanguageFile( array( 'public_main_bestPhoto' ), 'bestPhoto' );
 		
 				

@@ -4,4 +4,8 @@
 		<human>0.1.0</human>
 		<long>00100</long>
 	</version>
+	<version> 
+		<human>0.2.0</human>
+		<long>00200</long>
+	</version>
 </versions>

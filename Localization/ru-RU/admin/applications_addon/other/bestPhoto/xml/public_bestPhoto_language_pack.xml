@@ -61,5 +61,11 @@
       <word_key>bestPhoto_photos_not_found</word_key>
       <word_default>Фотографий не найдено</word_default>
     </lang>
+	<lang>                  
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_hook_title</word_key>
+      <word_default>Аэрография недели</word_default>
+    </lang>
   </languagegroup>
 </languageexport>

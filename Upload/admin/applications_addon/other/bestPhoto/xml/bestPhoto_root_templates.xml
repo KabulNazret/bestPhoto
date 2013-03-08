@@ -37,9 +37,13 @@
 </div>
 <div>
 {$this->lang->words['bestPhoto_rating']} {$record['rating']}<br />
-{$this->lang->words['bestPhoto_album']} <a href="/gallery/album/{$record['image']['album_id']}-{$record['image']['album_name_seo']}">{$record['image']['album_name']}</a>
+{$this->lang->words['bestPhoto_album']} 
+
+<a href='{parse url="app=gallery&amp;album={$record['image']['album_id']}" base="public" template="viewalbum" seotitle="{$record['image']['album_name_seo']}"}'>{parse expression="IPSText::truncate( $record['image']['album_name'], 40 )"}</a>
+
 <br />
-{$this->lang->words['bestPhoto_city']} <a href="/gallery/album/{$record['albumData']['album_id']}-{$record['albumData']['album_name_seo']}">{$record['albumData']['album_name']}</a>
+{$this->lang->words['bestPhoto_city']} 
+<a href='{parse url="app=gallery&amp;album={$record['albumData']['album_id']}" base="public" template="viewalbum" seotitle="{$record['albumData']['album_name_seo']}"}'>{parse expression="IPSText::truncate( $record['albumData']['album_name'], 40 )"}</a>
 </div>
 	  </div>
 	</div>

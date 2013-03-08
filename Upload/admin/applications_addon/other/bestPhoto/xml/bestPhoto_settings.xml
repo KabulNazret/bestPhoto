@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settingexport>
+  <settinggroup>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>bestPhoto</conf_title_keyword>
+      <conf_title_title>Основные настройки</conf_title_title>
+      <conf_title_desc/>
+      <conf_title_tab>Фото недели</conf_title_tab>
+      <conf_title_app>bestPhoto</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Блокированные фотографии</conf_title>
+      <conf_description><![CDATA[Если вы хотите, чтобы какие-либо фотографии не записывались в статистику, вы можете внести сюда их ID. Только цифры, через запятую. Например, "12100, 12121, 12233".]]></conf_description>
+      <conf_group>36</conf_group>
+      <conf_type>textarea</conf_type>
+      <conf_key>bestPhoto_blocked_photos</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>bestPhoto</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Фотографий на странице</conf_title>
+      <conf_description>Количество фотографий на странице. Значение по умолчанию - 20.</conf_description>
+      <conf_group>36</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>bestPhoto_images_onpage</conf_key>
+      <conf_default>20</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>bestPhoto</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </settinggroup>
+</settingexport>

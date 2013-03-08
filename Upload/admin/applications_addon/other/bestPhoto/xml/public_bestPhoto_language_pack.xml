@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<languageexport>
+  <languagegroup>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_title</word_key>
+      <word_default>Photo of the week</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_desc</word_key>
+      <word_default>Best photos of %s weeks</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_weekphoto</word_key>
+      <word_default>Best photo:</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_rating</word_key>
+      <word_default>Image rate:</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_album</word_key>
+      <word_default>Album:</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_city</word_key>
+      <word_default>Parent album:</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_from</word_key>
+      <word_default>from</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_to</word_key>
+      <word_default>to</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_current_photo</word_key>
+      <word_default>Current best photo</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_photos_not_found</word_key>
+      <word_default>Photos not found</word_default>
+    </lang>
+	<lang>                  
+      <word_app>bestPhoto</word_app>
+      <word_pack>public_main_bestPhoto</word_pack>
+      <word_key>bestPhoto_hook_title</word_key>
+      <word_default>Best photo of the week</word_default>
+    </lang>
+  </languagegroup>
+</languageexport>

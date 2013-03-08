@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hookexport>
+  <hookdata>
+    <config>
+      <hook_name><![CDATA[Фото недели]]></hook_name>
+      <hook_desc>Лучшее фото недели (по репутации)</hook_desc>
+      <hook_author>Anthony</hook_author>
+      <hook_email>kabul.nazret@gmail.com</hook_email>
+      <hook_website>http://brainfucklab.com</hook_website>
+      <hook_update_check/>
+      <hook_requirements><![CDATA[a:3:{s:21:"required_applications";a:1:{s:4:"core";a:3:{s:8:"app_name";s:9:"bestPhoto";s:11:"min_version";i:0;s:11:"max_version";i:0;}}s:20:"hook_php_version_min";s:0:"";s:20:"hook_php_version_max";s:0:"";}]]></hook_requirements>
+      <hook_version_human>1.4.0</hook_version_human>
+      <hook_version_long>14000</hook_version_long>
+      <hook_extra_data><![CDATA[a:2:{s:9:"templates";a:1:{s:11:"skin_boards";a:1:{i:0;s:8:"hookBestPhoto";}}s:7:"display";a:1:{s:9:"templates";s:26:"From skin_boards: hookBestPhoto";}}]]></hook_extra_data>
+      <hook_key>bestPhoto_viewBestPhoto</hook_key>
+      <hook_global_caches/>
+    </config>
+  </hookdata>
+  <hookfiles>
+    <file>
+      <hook_file_real>bestPhoto.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>bestPhoto</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:11:"skin_boards";s:12:"skinFunction";s:18:"boardIndexTemplate";s:4:"type";s:7:"foreach";s:2:"id";s:10:"side_blocks";s:8:"position";s:9:"outer.pre";}]]></hook_data>
+      <hooks_source><![CDATA[
+<?php
+
+/**
+ * This hook will show bost likely photo of the month
+ *
+ * @package bestPhoto
+ * @class SkinGlobalBestPhoto
+ * @author Anthony <kabul.nazret@gmail.com>
+ * @link http://brainfucklab.com
+ * @version 0.2
+ */
+class bestPhoto {
+	
+	/**
+	 * IP registry instance
+	 * @var object
+	 */
+	public $registry;
+	
+	/**
+	 * IP localization class
+	 * @var object
+	 */
+	protected $lang;
+	
+	
+	/**
+	 * Class entry point
+	 * @return void
+	 */
+	public function __construct() {
+		$this->registry 	= ipsRegistry::instance();
+		$this->DB	        = $this->registry->DB();
+		$this->settings     =& $this->registry->fetchSettings();
+		$this->request      =& $this->registry->fetchRequest();
+		$this->member       = $this->registry->member();
+		$this->memberData   =& $this->registry->member()->fetchMemberData();
+		$this->cache	    = $this->registry->cache();
+		$this->caches       =& $this->registry->cache()->fetchCaches();
+		
+		if ( ! $this->registry->isClassLoaded('gallery') ) {
+			//get gallery helper
+			require_once( IPS_ROOT_PATH . '/applications_addon/ips/gallery/sources/classes/gallery.php' );
+			$this->registry->setClass( 'gallery', new ipsGallery( $this->registry ) );
+		}
+	}
+	
+	
+	/**
+	 * Get last photo and send data into template
+	 * @return array
+	 */
+	public function getOutput() {
+	
+		//load language
+		$this->lang		    =  $this->registry->getClass('class_localization');
+		$this->lang->loadLanguageFile( array( 'public_main_bestPhoto' ), 'bestPhoto' );
+
+		
+		//get reputation data
+		$start = (int)strtotime('previous Monday'); //strtotime('first day of');
+		$end = (int)strtotime('next Monday'); //strtotime('last day of');
+		
+		$q = "SELECT type_id, SUM(rep_rating) as rp
+				FROM ibf_reputation_index
+				WHERE app = 'gallery' 
+						AND type = 'id' 
+						AND rep_rating != -1
+						AND rep_date BETWEEN " . $start . " AND " . $end . "
+			 ";
+		
+		//get blocked users
+		if(!empty($this->settings['bestPhoto_blocked_photos'])) {
+			$s = explode(',', $this->settings['bestPhoto_blocked_photos']);
+			$blocked = array();
+			foreach($s as $v) {
+				$v = (int)trim($v);
+				if(!empty($v)) {
+					$blocked[] = $v;
+				}
+			}
+			//have some ids ?
+			if(!empty($blocked)) {
+				$q .= " AND type_id NOT IN (" . implode(',', $blocked) . ") ";
+			}
+			
+		}
+		
+		$q	.= "GROUP BY type_id
+				ORDER BY rp DESC
+				LIMIT 1
+				";
+		
+		$r = $this->DB->query($q);
+		$repData = $this->DB->fetch($r);
+		
+		//get photo data
+		$image = $this->registry->gallery
+									->helper('image')
+									->fetchImage( $repData['type_id'] );
+		
+		//get album data
+		$parentAlbum = $this->registry->gallery
+									->helper('albums')
+									->fetchAlbumsById( $image['album_parent_id'] );
+		
+		//additional data
+		$image['repData'] = $repData;
+		$image['parentAlbum'] = $parentAlbum;		
+		
+		
+		$output = $this->registry->output
+									->getTemplate('boards')
+									->hookBestPhoto( $image );
+		
+		return $output;
+		
+	}
+	
+	
+	
+}
+
+
+]]></hooks_source>
+    </file>
+  </hookfiles>
+  <hookextras_settings/>
+  <hookextras_language/>
+  <hookextras_modules/>
+  <hookextras_help/>
+  <hookextras_templates>
+    <templates>
+      <template_group>skin_boards</template_group>
+      <template_content><![CDATA[<div class='ipsSideBlock clearfix'>
+	<h3><a href="/?app=bestPhoto" style="color: #fff;">{$this->lang->words['bestPhoto_hook_title']}</a></h3>
+
+<div style="text-align: center; font-weight: bold; padding-bottom: 4px;">
+{$image['caption']}
+</div>
+
+<div style="text-align: center;">
+{$image['thumb']}
+</div>
+
+<div style="text-align: center;padding-top: 10px;">
+
+<a href='{parse url="app=gallery&amp;album={$image['album_id']}" base="public" template="viewalbum" seotitle="{$image['album_name_seo']}"}'>{parse expression="IPSText::truncate( $image['album_name'], 40 )"}</a>
+
+<br />
+
+<a href='{parse url="app=gallery&amp;album={$image['parentAlbum']['album_id']}" base="public" template="viewalbum" seotitle="{$image['parentAlbum']['album_name_seo']}"}'>{parse expression="IPSText::truncate( $image['parentAlbum']['album_name'], 40 )"}</a>
+
+<br />
+
+{$this->lang->words['bestPhoto_rating']} <b>{$image['repData']['rp']}</b>
+<br />
+
+
+
+
+
+</div>
+
+<div style="text-align: right;padding-top: 3;">
+<right><b><a href="/topic/7034-%D0%B0%D1%8D%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F-%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8/" title="Что это такое?">?</a></b>
+</div>
+
+
+</div></right>]]></template_content>
+      <template_name>hookBestPhoto</template_name>
+      <template_data>$image</template_data>
+      <template_updated>1333923639</template_updated>
+      <template_removable>0</template_removable>
+      <template_added_to>0</template_added_to>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </templates>
+  </hookextras_templates>
+  <hookextras_css/>
+  <hookextras_replacements/>
+  <hookextras_tasks/>
+  <hookextras_database_create/>
+  <hookextras_database_alter/>
+  <hookextras_database_update/>
+  <hookextras_database_insert/>
+</hookexport>

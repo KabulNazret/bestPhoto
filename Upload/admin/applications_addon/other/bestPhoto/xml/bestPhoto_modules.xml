@@ -4,13 +4,24 @@
     <module>
       <sys_module_title>Фото недели</sys_module_title>
       <sys_module_application>bestPhoto</sys_module_application>
-      <sys_module_key>bestPhoto</sys_module_key>
+      <sys_module_key>main</sys_module_key>
       <sys_module_description>Вывод статистики лучших фотографий понедельно</sys_module_description>
       <sys_module_version>0.1.1</sys_module_version>
       <sys_module_protected>1</sys_module_protected>
       <sys_module_visible>1</sys_module_visible>
       <sys_module_position>60</sys_module_position>
       <sys_module_admin>0</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Пересчет</sys_module_title>
+      <sys_module_application>bestPhoto</sys_module_application>
+      <sys_module_key>recount</sys_module_key>
+      <sys_module_description>Пересчет и обновление статистики</sys_module_description>
+      <sys_module_version/>
+      <sys_module_protected>1</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>1</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
     </module>
   </modulegroup>
 </moduleexport>
