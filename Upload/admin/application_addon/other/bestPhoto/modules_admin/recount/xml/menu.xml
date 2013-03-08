@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Обслуживание</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Пересчет и обновление</subitemtitle>
+					<subsection>view</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>Обслуживание</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

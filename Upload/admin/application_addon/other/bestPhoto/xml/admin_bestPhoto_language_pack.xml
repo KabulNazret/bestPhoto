@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<languageexport>
+  <languagegroup>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>admin_main</word_pack>
+      <word_key>bestPhoto_donemsg</word_key>
+      <word_default>Статистика за последние 20 недель пересчитана</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>admin_main</word_pack>
+      <word_key>bestPhoto_recount_title</word_key>
+      <word_default>Пересчет и обновление статистики</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>admin_main</word_pack>
+      <word_key>bestPhoto_recount_desc</word_key>
+      <word_default>Если Вам кажется, что статистика отображается неверно, нажмите кнопку Пересчитать, и за последние 20 недель статистика будет обновлена.</word_default>
+    </lang>
+    <lang>
+      <word_app>bestPhoto</word_app>
+      <word_pack>admin_main</word_pack>
+      <word_key>bestPhoto_recount_button</word_key>
+      <word_default>Пересчитать</word_default>
+    </lang>
+  </languagegroup>
+</languageexport>

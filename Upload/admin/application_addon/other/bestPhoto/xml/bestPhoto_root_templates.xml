@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates application="bestPhoto" templategroups="a:1:{s:9:&quot;skin_bestphoto&quot;;s:5:&quot;exact&quot;;}">
+  <templategroup group="skin_bestPhoto">
+    <template>
+      <template_group>skin_bestPhoto</template_group>
+      <template_content><![CDATA[<h1 class="ipsType_pagetitle">
+	{parse expression="IPSLib::getAppTitle('bestPhoto')"}
+</h1>
+<p class="ipsType_pagedesc">
+{parse expression="sprintf($this->lang->words['bestPhoto_desc'], $iCount)"}
+</p>
+<br />
+<div id="category_motm" class="category_block block_wrap">
+	<h3 class="maintitle" style="padding: 3px 6px 3px;">
+		&nbsp;</h3>
+</div>
+
+<if test="$iCount > 0">
+<foreach loop="$images as $k => $record">
+<div class="ipsBox">
+<div class="ipsBox_container ipsPad" <if test="$k == 0"> style="background-color:beige;" </if>>
+<table class="ipsTable">
+ <tr>
+  <td width="80px" align="center">
+   {$record['image']['thumb']}
+</td>
+<td>
+        <div style="position:relative;left:-5px;padding:5px 0px 5px 15px;">
+	  <div style="border-bottom:1px solid lightgrey;padding-bottom:3px;">
+	    <div><h4> <span style="font-size:1.3em;">{parse expression="IPSMember::makeProfileLink( $record['image']['album_name'], $record['image']['member_id'], $record['image']['members_seo_name'] )"}</span> 
+
+<if test="$k == 0">
+ <span class="ipsBadge ipsBadge_green reset_cursor" style="margin-bottom:4px;">
+{$this->lang->words['bestPhoto_current_photo']}</span>
+</if>
+		<span style="float:right;color:grey;font-size:10px;position:relative;">{$this->lang->words['bestPhoto_weekphoto']} <div class="ipsBadge" style="background:green;height: 32px;text-align:right;">{$this->lang->words['bestPhoto_from']} {$record['date_from']}<br />{$this->lang->words['bestPhoto_to']} {$record['date_to']}</div></span></h4> 
+</div>
+<div>
+{$this->lang->words['bestPhoto_rating']} {$record['rating']}<br />
+{$this->lang->words['bestPhoto_album']} <a href="/gallery/album/{$record['image']['album_id']}-{$record['image']['album_name_seo']}">{$record['image']['album_name']}</a>
+<br />
+{$this->lang->words['bestPhoto_city']} <a href="/gallery/album/{$record['albumData']['album_id']}-{$record['albumData']['album_name_seo']}">{$record['albumData']['album_name']}</a>
+</div>
+	  </div>
+	</div>
+</td></tr>
+</table>
+
+</div>
+</div>
+</foreach>
+<else />
+ <div class="ipsBox">
+   <div class="ipsBox_container ipsPad">
+      <p>{$this->lang->words['bestPhoto_photos_not_found']}</p>
+   </div>
+ </div>
+</if>]]></template_content>
+      <template_name>viewList</template_name>
+      <template_data>$images,$iCount</template_data>
+      <template_updated>1333723128</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </template>
+  </templategroup>
+</templates>

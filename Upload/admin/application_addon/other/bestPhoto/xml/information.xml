@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<information>
+  <data>
+    <name>Фото недели</name>
+    <public_name>Фото недели</public_name>
+    <hide_tab>1</hide_tab>
+    <author>Anthony</author>
+    <description>Вывод статистики лучших фотографий понедельно</description>
+    <disabledatinstall>0</disabledatinstall>
+    <global_caches/>
+    <website>http://brainfucklab.com/</website>
+    <update_check/>
+    <templategroups>
+        <template match="exact">skin_bestPhoto</template>
+    </templategroups>
+  </data>
+</information>
